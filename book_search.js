@@ -22,12 +22,29 @@
     /** You will need to implement your search and 
      * return the appropriate object here. */
 
-    var result = {
-        "SearchTerm": "",
+    let searchResults = {
+        "SearchTerm": searchTerm,
         "Results": []
     };
-    
-    return result; 
+
+    // map through input books
+    scannedTextObj.map((book, i) => {
+        // map through input book sections
+        for (const section of book.Content) {
+            if (section.Text.includes(searchTerm)) {
+
+                // push formatted result to array of results
+                searchResults.Results.push({
+                    "ISBN": book.ISBN,
+                    "Page": +section.Page,
+                    "Line": +section.Line
+                });
+            }
+        }
+    })
+
+  return searchResults;
+
 }
 
 /** Example input object. */
